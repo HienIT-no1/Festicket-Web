@@ -32,7 +32,12 @@ app.use(express.static(__dirname));
 
 // Kết nối DB
 const db = mysql.createConnection({
-    host: 'localhost', user: 'root', password: '123456', database: 'VeSuKienDB', charset: 'utf8mb4' 
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '123456',
+    database: process.env.DB_NAME || 'VeSuKienDB',
+    port: process.env.DB_PORT || 3306,
+    charset: 'utf8mb4' 
 });
 db.connect(err => {
     if (err) console.error('❌ Lỗi kết nối DB:', err);
@@ -1773,12 +1778,16 @@ app.post('/api/auth/reset-password', (req, res) => {
 });
 // Route phục vụ file HTML
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'trangchu', 'trangchu.html'));
+    res.sendFile(path.join(__dirname, 'trangchu', 'trangchu1.html'));
+});
+app.get(['/trangchu/trangchu.html', '/trangchu.html'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'trangchu', 'trangchu1.html'));
 });
 
 
-app.listen(3000, () => {
-    console.log(`🚀 Server chạy tại http://localhost:3000`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`🚀 Server chạy tại http://localhost:${port}`);
 });
 
 
