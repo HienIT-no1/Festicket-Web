@@ -30,14 +30,19 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static(__dirname)); 
 
-// Kết nối DB
+// Kết nối DB bằng Connection Pool (Chuẩn production, chống lỗi rớt mạng / idle timeout)
 const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '123456',
     database: process.env.DB_NAME || 'VeSuKienDB',
     port: process.env.DB_PORT || 3306,
-    charset: 'utf8mb4'
+    charset: 'utf8mb4',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 10000
 };
 
 // TiDB Cloud Serverless bắt buộc kết nối bảo mật qua SSL
@@ -48,10 +53,62 @@ if (process.env.DB_HOST && process.env.DB_HOST !== 'localhost') {
     };
 }
 
-const db = mysql.createConnection(dbConfig);
-db.connect(err => {
-    if (err) console.error('❌ Lỗi kết nối DB:', err);
-    else console.log('✅ Đã kết nối MySQL!');
+const pool = mysql.createPool(dbConfig);
+
+// Đối tượng db bọc Pool để tương thích 100% với code hiện tại
+const db = {
+    _txConnection: null,
+    query: function(...args) {
+        if (this._txConnection) {
+            return this._txConnection.query(...args);
+        }
+        return pool.query(...args);
+    },
+    execute: function(...args) {
+        if (this._txConnection) {
+            return this._txConnection.execute(...args);
+        }
+        return pool.execute(...args);
+    },
+    beginTransaction: function(callback) {
+        pool.getConnection((err, connection) => {
+            if (err) return callback(err);
+            this._txConnection = connection;
+            connection.beginTransaction(callback);
+        });
+    },
+    commit: function(callback) {
+        if (this._txConnection) {
+            this._txConnection.commit((err) => {
+                this._txConnection.release();
+                this._txConnection = null;
+                if (callback) callback(err);
+            });
+        } else if (callback) {
+            callback(null);
+        }
+    },
+    rollback: function(callback) {
+        if (this._txConnection) {
+            this._txConnection.rollback(() => {
+                this._txConnection.release();
+                this._txConnection = null;
+                if (callback) callback();
+            });
+        } else if (callback) {
+            callback();
+        }
+    }
+};
+
+// Kiểm tra kết nối Pool ban đầu
+pool.getConnection((err, conn) => {
+    if (err) {
+        console.error('❌ Lỗi kết nối DB (Pool):', err.message);
+    } else {
+        console.log('✅ Đã kết nối MySQL Connection Pool thành công!');
+        conn.release();
+    }
 });
 
 
