@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tạo sự kiện - Organizer Center</title>
+  <link rel="stylesheet" href="taochuongtrinh.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/trangchu/trangchu.css">
+</head>
+
+<body class="bg-page text-gray-200">
+
+
+  <div id="toast">
+    <div id="toastCard" class="toast-card"></div>
+  </div>
+
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-56 sidebar-gradient border-r border-dark flex flex-col justify-between">
+      <div>
+        <div class="flex items-center px-4 py-4 border-b border-dark">
+          <div class="brand-bg text-white font-bold w-9 h-9 rounded flex items-center justify-center">OC</div>
+          <span class="ml-2 font-semibold brand-text">Organizer Center</span>
+        </div>
+        <nav class="mt-4 space-y-1 px-2 text-[.9rem]">
+          <a href="/sukiencuatoi/sukiencuatoi.html" class="nav-item">Chương trình của tôi</a>
+        </nav>
+      </div>
+      <div class="px-4 py-3 border-t border-dark text-[.8rem]">
+        <div class="flex items-center justify-between text-gray-300">
+          <span class="text-sm text-gray-400">Ngôn ngữ</span>
+          <div class="flex items-center space-x-2">
+            <span class="text-sm text-gray-300">Vie</span>
+            <img src="https://flagcdn.com/w20/vn.png" class="w-5 h-4 rounded" />
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="flex-1 flex flex-col">
+      <!-- Header -->
+      <header class="topbar flex items-center justify-between px-6 py-3">
+        <h1 class="text-white font-semibold text-lg">Tạo chương trình</h1>
+        <!-- <div class="flex items-center space-x-3">
+          <button class="btn-solid-brand text-sm font-medium">+ Tạo chương trình</button>
+ 
+        </div> -->
+      </header>
+
+      <!-- Progress -->
+      <div class="progressbar px-6 py-3 text-sm">
+        <div class="flex-1 flex items-center justify-between max-w-4xl mx-auto flex-wrap gap-y-3">
+          <div id="stepHead1" class="step-head active">
+            <div>1</div><span>Thông tin chương trình</span>
+          </div>
+          <div class="sep"></div>
+          <div id="stepHead2" class="step-head">
+            <div>2</div><span>Thời gian &amp; Loại vé</span>
+          </div>
+
+          <div class="sep"></div>
+          <div id="stepHead4" class="step-head">
+            <div>3</div><span>Thông tin thanh toán</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <main class="flex-1 overflow-y-auto px-6 py-6">
+        <div class="max-w-5xl mx-auto space-y-8">
+
+          <!-- STEP 1 -->
+          <section id="step1" class="space-y-6">
+            <!-- Upload ảnh -->
+            <section class="section-card p-6 space-y-4">
+              <h2 class="section-title">
+                <span class="text-red-400 mr-1">*</span> Upload hình ảnh
+                <a href="#" class="ml-2 text-[.8rem] brand-text hover:underline">Xem vị trí hiển thị các ảnh</a>
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label id="zoneEvent" class="upload-zone">
+                  <input id="fileEvent" type="file" accept="image/*" class="hidden" />
+                  <img id="previewEvent" class="hidden preview" alt="preview" />
+                  <div id="zoneEventEmpty" class="placeholder">
+                    <svg class="icon-plus" viewBox="0 0 24 24">
+                      <path d="M3 16l4-4a4 4 0 015.657 0L17 16m-5-6V4m0 0l-3 3m3-3l3 3M3 21h18" stroke="currentColor"
+                        fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p>Thêm ảnh sự kiện</p>
+                    <p class="hint">(720x958)</p>
+                  </div>
+                </label>
+                <label id="zoneCover" class="upload-zone">
+                  <input id="fileCover" type="file" accept="image/*" class="hidden" />
+                  <img id="previewCover" class="hidden preview" alt="preview" />
+                  <div id="zoneCoverEmpty" class="placeholder">
+                    <svg class="icon-plus" viewBox="0 0 24 24">
+                      <path d="M3 16l4-4a4 4 0 015.657 0L17 16m-5-6V4m0 0l-3 3m3-3l3 3M3 21h18" stroke="currentColor"
+                        fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p>Thêm ảnh nền sự kiện</p>
+                    <p class="hint">(1280x720)</p>
+                  </div>
+                </label>
+              </div>
+            </section>
+
+            <!-- Form thông tin sự kiện -->
+            <section class="section-card p-6 space-y-6" id="eventForm">
+              <div>
+                <label class="field-label"><span class="text-red-400">*</span> Tên chương trình</label>
+                <input id="eventName" type="text" placeholder="Tên sự kiện" class="input-field" />
+              </div>
+
+              <div>
+                <label class="field-label"><span class="text-red-400">*</span> Địa chỉ chương trình</label>
+                <!-- <div class="flex flex-wrap gap-6 items-center mb-3 text-sm">
+                  <label class="flex items-center space-x-2"><input type="radio" name="eventMode" id="modeOffline"
+                      value="offline" checked /><span>Sự kiện Offline</span></label>
+                  <label class="flex items-center space-x-2"><input type="radio" name="eventMode" id="modeOnline"
+                      value="online" /><span>Sự kiện Online</span></label>
+                </div> -->
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <input id="venueName" type="text" placeholder="Tên địa điểm" class="input-field" />
+                  <input id="addressLine" type="text" placeholder="Số nhà, đường" class="input-field" />
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <select id="province" class="select-field">
+                    <option value="">Tỉnh/Thành</option>
+                  </select>
+                  <select id="district" class="select-field">
+                    <option value="">Quận/Huyện</option>
+                  </select>
+                  <select id="ward" class="select-field">
+                    <option value="">Phường/Xã</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="field-label"><span class="text-red-400">*</span> Thể loại chương trình</label>
+                <select id="category" class="select-field">
+                  <option value="">Vui lòng chọn</option>
+                  <option>Nhạc sống</option>
+                  <option>Sân khấu</option>
+                  <option>Thể thao</option>
+                  <option>Khác</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="field-label">Thông tin chương trình</label>
+                <textarea id="eventDetails" rows="14" class="textarea-field" spellcheck="false">Giới thiệu chương trình:
+
+[Tóm tắt ngắn gọn về sự kiện: Nội dung chính của sự kiện, điểm đặc sắc nhất và lý do khiến người tham gia không nên bỏ lỡ]
+
+Chi tiết sự kiện:
+• Chương trình chính: [Liệt kê những hoạt động nổi bật trong sự kiện: các phần trình diễn, khách mời đặc biệt, lịch trình các tiết mục cụ thể nếu có.]
+• Khách mời: [Thông tin về các khách mời đặc biệt, nghệ sĩ, diễn giả sẽ tham gia sự kiện. Có thể bao gồm phần mô tả ngắn gọn về họ và những gì họ sẽ mang lại cho sự kiện.]
+• Trải nghiệm đặc biệt: [Nếu có các hoạt động đặc biệt khác như workshop, khu trải nghiệm, photo booth, khu vực check-in hay các phần quà/ưu đãi dành riêng cho người tham dự.]
+
+Điều khoản và điều kiện:
+
+[TnC] sự kiện
+
+Lưu ý về điều khoản trẻ em
+Lưu ý về điều khoản VAT</textarea>
+                <p class="note">Bạn có thể sửa lại nội dung ở trên cho phù hợp với sự kiện.</p>
+              </div>
+            </section>
+          </section>
+
+          <!-- STEP 2 -->
+          <section id="step2" class="hidden space-y-6">
+            <h2 class="section-title">Thời Gian</h2>
+            <section class="section-card p-6 space-y-6">
+              <div class="flex items-center justify-between">
+                <div class="font-semibold">Ngày sự kiện</div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><label class="field-label-sm">Thời gian bắt đầu</label><input id="startAt" type="datetime-local"
+                    class="input-field" /></div>
+                <div><label class="field-label-sm">Thời gian kết thúc</label><input id="endAt" type="datetime-local"
+                    class="input-field" /></div>
+              </div>
+              <div class="pt-2">
+                <label class="field-label"><span class="text-red-400">*</span> Loại vé</label>
+                <button id="btnOpenTicketModal" class="ticket-add-btn"><span class="plus">+</span> Tạo loại vé
+                  mới</button>
+                <div id="ticketList" class="mt-4 space-y-2"></div>
+              </div>
+            </section>
+            <div class="flex flex-wrap gap-3">
+              <button id="btnBack2" class="btn-outline-brand text-sm font-medium">Quay lại</button>
+            </div>
+          </section>
+
+          <!-- STEP 3: CÀI ĐẶT -->
+          <section id="step3" class="hidden space-y-6">
+            <section class="section-card p-6 space-y-4">
+              <h3 class="section-title">Link dẫn đến sự kiện</h3>
+              <div>
+                <label class="field-label"><span class="text-red-400">*</span> Tùy chỉnh đường dẫn:</label>
+                <input id="slug" type="text" maxlength="80" class="input-field" placeholder="vd: su-kien-cua-toi" />
+                <div class="flex items-center justify-between mt-2 text-sm text-gray-300">
+                  <span>Đường dẫn sự kiện của bạn là: <span id="slugFull"
+                      class="brand-text">https://festicket.vn/</span></span>
+                  <span id="slugCount">0 / 80</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="section-card p-6 space-y-4">
+              <h3 class="section-title">Quyền riêng tư sự kiện</h3>
+              <div class="space-y-3 text-sm">
+                <label class="flex items-center gap-3">
+                  <input type="radio" name="privacy" value="public" checked />
+                  <div>
+                    <div class="font-semibold">Sự kiện mở cho mọi người</div>
+                    <div class="text-gray-400">Tất cả mọi người đều có thể đặt vé</div>
+                  </div>
+                </label>
+                <label class="flex items-center gap-3">
+                  <input type="radio" name="privacy" value="group" />
+                  <div>
+                    <div class="font-semibold">Sự kiện dành riêng cho 1 nhóm</div>
+                    <div class="text-gray-400">Chỉ người có link truy cập mới đặt được vé</div>
+                  </div>
+                </label>
+              </div>
+            </section>
+
+            <section class="section-card p-6 space-y-4">
+              <h3 class="section-title">Tin nhắn xác nhận cho người tham gia</h3>
+              <textarea id="confirmMsg" rows="8" maxlength="500" class="textarea-field"
+                placeholder="Tin nhắn xác nhận sẽ được gửi sau khi đặt vé thành công"></textarea>
+              <div class="text-right text-sm text-gray-400"><span id="confirmCount">0</span> / 500</div>
+            </section>
+
+            <div class="flex flex-wrap gap-3">
+              <button id="btnBack3" class="btn-outline-brand text-sm font-medium">Quay lại</button>
+            </div>
+          </section>
+
+          <!-- STEP 4: THÔNG TIN THANH TOÁN -->
+          <section id="step4" class="hidden space-y-6">
+            <section class="section-card p-6 space-y-6">
+              <h3 class="section-title">Thông tin thanh toán</h3>
+              <p class="text-gray-300 text-sm -mt-1">FesTicket sẽ chuyển tiền bán vé đến tài khoản của bạn (sau khi trừ
+                phí dịch vụ) vào 7–10 ngày sau khi xác nhận sale report. Nếu muốn nhận sớm hơn, liên hệ 1900.6408 hoặc
+                <span class="brand-text">info@festicket.vn</span>.</p>
+
+              <div><label class="field-label">Chủ tài khoản:</label><input id="payAccName" maxlength="100"
+                  class="input-field" placeholder="VD: NGUYEN VAN A" />
+                <div class="right-hint"><span id="payAccNameCount">0</span> / 100</div>
+              </div>
+              <div><label class="field-label">Số tài khoản:</label><input id="payAccNumber" inputmode="numeric"
+                  class="input-field" placeholder="VD: 0123456789" /></div>
+              <div><label class="field-label">Tên ngân hàng:</label><input id="payBankName" maxlength="100"
+                  class="input-field" placeholder="VD: Vietcombank" />
+                <div class="right-hint"><span id="payBankNameCount">0</span> / 100</div>
+              </div>
+              <div><label class="field-label">Chi nhánh:</label><input id="payBranch" maxlength="100"
+                  class="input-field" placeholder="VD: CN Hà Nội" />
+                <div class="right-hint"><span id="payBranchCount">0</span> / 100</div>
+              </div>
+            </section>
+
+            <section class="section-card p-6 space-y-6">
+              <h3 class="section-title">Hoá đơn đỏ</h3>
+              <div><label class="field-label">Loại hình kinh doanh:</label><select id="invType" class="select-field">
+                  <option value="individual">Cá nhân</option>
+                  <option value="company">Công ty</option>
+                </select></div>
+              <div><label class="field-label">Họ tên / Tên công ty:</label><input id="invFullName" maxlength="100"
+                  class="input-field" placeholder="VD: CÔNG TY TNHH ABC hoặc NGUYỄN VĂN A" />
+                <div class="right-hint"><span id="invFullNameCount">0</span> / 100</div>
+              </div>
+              <div><label class="field-label">Địa chỉ:</label><input id="invAddress" maxlength="100" class="input-field"
+                  placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành" />
+                <div class="right-hint"><span id="invAddressCount">0</span> / 100</div>
+              </div>
+              <div><label class="field-label">Mã số thuế:</label><input id="invTaxCode" class="input-field"
+                  inputmode="numeric" placeholder="Chỉ yêu cầu khi chọn Công ty" /></div>
+            </section>
+
+            <div class="flex flex-wrap gap-3">
+              <button id="btnBack4" class="btn-outline-brand text-sm font-medium">Quay lại</button>
+            </div>
+          </section>
+
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="app-footer px-6 py-4 flex justify-between items-center flex-wrap gap-y-4">
+        <button id="btnSave" class="btn-outline-brand text-sm font-medium">Lưu nháp</button>
+        <button id="btnNext" class="btn-solid-brand text-sm font-medium">Tiếp tục</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- MODAL: Tạo loại vé mới -->
+  <div id="ticketModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="title">Tạo loại vé mới</div><button id="ticketClose" class="close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="grid grid-cols-1 gap-4">
+          <div>
+            <label class="field-label"><span class="text-red-400">*</span> Tên vé</label>
+            <input id="ticketName" type="text" maxlength="50" placeholder="Tên vé" class="input-field" />
+            <div class="right-hint"><span id="ticketNameCount">0</span> / 50</div>
+          </div>
+
+          <div class="grid md:grid-cols-4 gap-4">
+            <div>
+              <label class="field-label"><span class="text-red-400">*</span> Giá vé</label>
+              <div class="flex items-center gap-3">
+                <input id="ticketPrice" type="number" min="0" class="input-field" />
+                <label class="flex items-center gap-2 text-sm"><input id="ticketFree" type="checkbox" /> Miễn
+                  phí</label>
+              </div>
+            </div>
+            <div><label class="field-label"><span class="text-red-400">*</span> Tổng số lượng vé</label><input
+                id="ticketTotal" type="number" min="0" value="10" class="input-field" /></div>
+            <div><label class="field-label"><span class="text-red-400">*</span> Số vé tối thiểu trong một đơn
+                hàng</label><input id="ticketMin" type="number" min="1" value="1" class="input-field" /></div>
+            <div><label class="field-label"><span class="text-red-400">*</span> Số vé tối đa trong một đơn
+                hàng</label><input id="ticketMax" type="number" min="1" value="10" class="input-field" /></div>
+          </div>
+          <!-- 
+          <div class="grid md:grid-cols-2 gap-4">
+            <div><label class="field-label"><span class="text-red-400">*</span> Thời gian bắt đầu bán vé</label><input
+                id="ticketSaleStart" type="datetime-local" class="input-field" /></div>
+            <div><label class="field-label"><span class="text-red-400">*</span> Thời gian kết thúc bán vé</label><input
+                id="ticketSaleEnd" type="datetime-local" class="input-field" /></div>
+          </div> -->
+
+          <div class="grid md:grid-cols-2 gap-4 items-start">
+            <div>
+              <label class="field-label">Thông tin vé</label>
+              <textarea id="ticketDesc" rows="7" maxlength="1000" placeholder="Description"
+                class="textarea-field"></textarea>
+              <div class="right-hint"><span id="ticketDescCount">0</span> / 1000</div>
+            </div>
+
+            <label id="ticketImgZone" class="upload-zone h-52">
+              <input id="ticketImgFile" type="file" accept="image/*" class="hidden" />
+              <img id="ticketImgPreview" class="hidden preview" alt="ticket-preview" />
+              <div id="ticketImgEmpty" class="placeholder">
+                <svg class="icon-box" viewBox="0 0 24 24">
+                  <path d="M3 7h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7zm3-4h12l3 4H3l3-4z" fill="currentColor" />
+                </svg>
+                <p>Thêm</p>
+                <p class="hint">1MB</p>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot"><button id="ticketSave" class="btn-solid-brand w-full">Lưu</button></div>
+    </div>
+  </div>
+
+  <script src="taochuongtrinh.js"></script>
+  <script src="/header.js"></script>
+</body>
+
+</html>

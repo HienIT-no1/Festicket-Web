@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Lại Mật Khẩu - Festicket</title>
+    <link rel="stylesheet" href="/trangchu/trangchu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Tái sử dụng và tùy chỉnh CSS từ trang quên mật khẩu */
+        body { background-color: #333; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .reset-container {
+            background-color: #2a2a2a;
+            padding: 40px;
+            border-radius: 15px;
+            width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .reset-container h2 {
+            margin-bottom: 25px;
+            color: #FF6A88;
+            font-size: 24px;
+        }
+        .reset-container p {
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+        .input-group-reset input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: white;
+            outline: none;
+            margin-bottom: 20px;
+        }
+        .submit-btn-reset {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 25px;
+            background-color: #00c853;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn-reset:hover {
+            background-color: #00a843;
+        }
+        .back-to-login {
+            display: block;
+            margin-top: 20px;
+            color: #FF6A88;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .back-to-login:hover {
+            color: #fff;
+        }
+
+
+        /* === CSS CỦA MODAL (Đã FIX) === */
+        .modal-overlay {
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            /* Điều khiển hiển thị/ẩn bằng visibility và opacity */
+            visibility: hidden; 
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-container {
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.show .modal-container {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="reset-container">
+        <h2>Đặt Lại Mật Khẩu</h2>
+        <p>Vui lòng nhập Email đã đăng ký và Mật khẩu mới mong muốn.</p>
+
+        <form id="resetForm" onsubmit="event.preventDefault(); requestOtpAndShowModal();">
+            <div class="input-group-reset">
+                <input type="email" id="resetEmail" placeholder="Địa chỉ Email của bạn" required>
+            </div>
+            
+            <div class="input-group-reset">
+                <input type="password" id="newPassword" placeholder="Mật khẩu mới (ít nhất 6 ký tự)" required>
+            </div>
+            <div class="input-group-reset">
+                <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu mới" required>
+            </div>
+            
+            <button class="submit-btn-reset" type="submit">Gửi Yêu Cầu và Xác minh OTP</button>
+        </form>
+
+        <a href="#" class="back-to-login" onclick="window.location.href='/trangchu/trangchu1.html';">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại Đăng nhập
+        </a>
+    </div>
+
+    <div id="otpModal" class="modal-overlay">
+        <div class="modal-container" style="width: 350px;">
+            <div style="padding: 10px 0; text-align: center;">
+                <h2 style="margin-top: 0;">Xác Minh Mã OTP</h2>
+                <p id="otpMessage" style="font-size: 14px; margin-bottom: 20px;">Mã OTP (6 chữ số) đã được gửi đến email của bạn. Vui lòng kiểm tra hộp thư.</p>
+                
+                <div class="input-group-reset">
+                    <input type="text" id="otpCode" placeholder="Mã OTP 6 chữ số" maxlength="6">
+                </div>
+                
+                <button class="submit-btn-reset" onclick="handleResetPassword()">Hoàn tất Đặt Lại Mật Khẩu</button>
+
+                <div style="margin-top: 15px; color: #888; font-size: 13px;">
+                    <a href="#" onclick="requestOtpAndShowModal(true)" style="color: #FF6A88; text-decoration: none;">Gửi lại Mã OTP</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Hàm hiển thị Modal
+        function showOtpModal() {
+            const modal = document.getElementById('otpModal');
+            // Dùng class 'show' để CSS (visibility: visible và opacity: 1) hoạt động
+            modal.classList.add('show');
+        }
+        
+        // Hàm đóng Modal
+        function hideOtpModal() {
+            const modal = document.getElementById('otpModal');
+            // Xóa class 'show' để CSS (visibility: hidden và opacity: 0) hoạt động
+            modal.classList.remove('show');
+        }
+
+        // BƯỚC 1: YÊU CẦU OTP và HIỂN THỊ MODAL
+        async function requestOtpAndShowModal(isResend = false) {
+            const email = document.getElementById('resetEmail').value.trim();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Kiểm tra ràng buộc (đã được thực hiện qua thuộc tính required của form)
+            if (newPassword.length < 6) {
+                return alert('Mật khẩu mới phải có ít nhất 6 ký tự.');
+            }
+            if (newPassword !== confirmPassword) {
+                return alert('Mật khẩu xác nhận không khớp.');
+            }
+            if (!email) {
+                 return alert('Vui lòng nhập Email.');
+            }
+
+            // Gọi API gửi OTP (đã có trong server.js)
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/forgot-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    if (!isResend) {
+                        // Lần gửi đầu tiên: Hiển thị Modal
+                        document.getElementById('otpMessage').textContent = `Mã OTP (6 chữ số) đã được gửi đến email ${email}. Vui lòng kiểm tra hộp thư. Mã sẽ hết hạn sau 5 phút.`;
+                        showOtpModal();
+                    } else {
+                        // Gửi lại: Chỉ báo alert
+                        alert(data.message); 
+                    }
+                } else {
+                    alert(data.message || "Lỗi yêu cầu OTP.");
+                }
+            } catch (error) {
+                console.error("Lỗi khi gọi API OTP:", error);
+                alert("Lỗi hệ thống khi yêu cầu OTP. Vui lòng kiểm tra server.");
+            }
+        }
+
+        // BƯỚC 2: GỬI YÊU CẦU ĐẶT LẠI MẬT KHẨU CÙNG OTP
+        async function handleResetPassword() {
+            const resetEmail = document.getElementById('resetEmail').value.trim();
+            const otpCode = document.getElementById('otpCode').value.trim();
+            const newPassword = document.getElementById('newPassword').value;
+
+            if (otpCode.length !== 6 || isNaN(otpCode)) {
+                return alert('Mã OTP phải là 6 chữ số.');
+            }
+
+            // Gọi API đặt lại mật khẩu (đã có trong server.js)
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/reset-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: otpCode, email: resetEmail, newPassword: newPassword }) 
+                });
+
+                const data = await response.json();
+                
+                hideOtpModal(); // Đóng modal
+
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = '/trangchu/trangchu1.html'; 
+                } else {
+                    alert(data.message || "Lỗi đặt lại mật khẩu. Vui lòng thử lại.");
+                }
+            } catch (error) {
+                console.error("Lỗi khi gọi API Reset Password:", error);
+                alert("Lỗi hệ thống khi đặt lại mật khẩu. Vui lòng kiểm tra server.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,665 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #333;
+    color: white;
+    /* Thiết lập body/html để hỗ trợ sticky footer */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- HEADER --- */
+.header {
+    background-color: #FF6A88;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+}
+
+.search-container {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 30px;
+    position: relative;
+}
+
+.search-box {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+}
+
+.search-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #00c853;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.header-btn:hover {
+    background: white;
+    color: #00c853;
+}
+
+/* --- USER DROPDOWN & AUTH BUTTONS --- */
+.account-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    min-width: 250px;
+    margin-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.account-btn:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.header-btn-auth {
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.header-btn-auth:hover {
+    color: #00c853;
+}
+
+/* --- BREADCRUMB --- */
+.breadcrumb {
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.breadcrumb a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #fff;
+}
+
+/* --- MAIN CONTAINER & SIDEBAR --- */
+.container {
+    flex-grow: 1; 
+    display: flex;
+    padding: 20px 50px;
+    gap: 30px;
+}
+
+.sidebar {
+    width: 300px;
+    background: #363636;
+    border-radius: 12px;
+    padding: 25px;
+    height: fit-content;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #4a4a4a;
+}
+
+.user-name {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.user-name-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    margin-top: 3px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.menu-item.active {
+    background: #404040;
+    color: #2ecc71;
+}
+
+.menu-item:hover {
+    background: #404040;
+}
+
+.menu-item:hover .menu-icon, 
+.menu-item.active .menu-icon {
+    color: #2ecc71;
+}
+
+/* --- CONTENT AREA & TABS --- */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 25px; 
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: none;
+    font-size: 14px;
+}
+
+.tab.active {
+    background: #2ecc71;
+    color: white;
+}
+
+.tab:not(.active) {
+    background: #4a4a4a;
+    color: #aaa;
+}
+
+.tab:not(.active):hover {
+    background: #555;
+}
+
+/* --- TICKET CARD STYLES (Đã sửa lỗi bố cục) --- */
+
+.orders-list {
+    /* Đã sửa: Sử dụng Grid để phân bố các thẻ vé */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+    gap: 25px;
+    margin-top: 10px;
+    flex-grow: 1; 
+}
+
+/* Thẻ vé chính */
+.ticket-card {
+    background: #363636;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    
+    /* Bố cục chính: Ảnh bên trái, Nội dung bên phải */
+    display: flex; 
+    min-height: 150px;
+    
+}
+
+.ticket-card:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Ảnh Poster (Nền) */
+.ticket-image {
+    width: 160px; 
+    height: 100%; 
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0; 
+    border-radius: 12px 0 0 12px; 
+}
+
+/* Chi tiết vé */
+.ticket-details {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    width: 150px;
+}
+
+.event-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+}
+
+/* Thông tin sự kiện (Ngày giờ, Địa điểm) */
+.event-info p {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 3px;
+}
+
+.event-info i {
+    color: #ff6b6b;
+    margin-right: 8px;
+    width: 16px;
+    text-align: center;
+}
+
+/* Đường kẻ phân cách */
+.ticket-details hr {
+    border-color: #4a4a4a;
+    margin: 10px 0;
+}
+
+/* Chi tiết Đơn hàng (Tổng tiền, Ngày tạo) */
+.order-summary-details {
+    padding-top: 10px;
+}
+
+.order-summary-details p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.order-summary-details .detail-label {
+    color: #aaa;
+}
+
+.order-summary-details .total-price {
+    color: #2ecc71 !important;
+    font-weight: bold !important;
+    font-size: 14px;
+}
+
+/* Trạng thái và Nút hành động */
+.ticket-status {
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.view-detail-btn {
+    background: #555;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.view-detail-btn:hover {
+    background: #2ecc71;
+}
+
+/* Màu sắc Trạng thái (Phải khớp với class trong JS) */
+.status-badge.processing {
+    background-color: #ffc107; /* Vàng */
+    color: #333;
+}
+
+.status-badge.pending {
+    background-color: #00bcd4;
+    color: white;
+}
+
+.status-badge.cancelled {
+    background-color: #f44336;
+    color: white;
+}
+
+.status-badge.completed {
+    background-color: #2ecc71;
+    color: white;
+}
+
+/* --- EMPTY STATE (Giữ nguyên) --- */
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.buy-ticket-btn {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.buy-ticket-btn:hover {
+    background: #27ae60;
+}
+
+/* --- FOOTER (Đã sửa lỗi đè footer) --- */
+.footer {
+    background: #1a1a1a;
+    padding: 50px 50px;
+    /* Rất quan trọng: Đẩy footer xuống cuối trang */
+    margin-top: auto; 
+}
+
+.footer .containerfooter {
+    max-width: 100%;
+}
+
+.footer .inner-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-section h3 {
+    color: #00c853;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #999;
+    margin-bottom: 10px;
+    line-height: 1.6;
+    display: block;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #00c853;
+}
+
+.footer-section .socials {
+    display: flex;
+    gap: 15px;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+/* --- MODAL AUTH (Giữ nguyên) --- */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-container {
+    background-color: #2a2a2a; 
+    width: 400px;
+    border-radius: 15px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    border: 1px solid #444;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #444;
+    margin-bottom: 20px;
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #888;
+    transition: all 0.3s;
+}
+
+.auth-tab.active {
+    color: #FF6A88;
+    border-bottom: 2px solid #FF6A88;
+}
+
+.auth-form {
+    display: none; 
+    text-align: center;
+}
+
+.auth-form.active {
+    display: block; 
+    animation: fadeIn 0.5s;
+}
+
+.auth-form h2 {
+    margin-bottom: 20px;
+    color: white;
+    font-size: 22px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #00c853;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.social-login {
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+
+/* --- CSS BỔ SUNG CHO MODAL QR --- */
+
+/* Đảm bảo lớp phủ modal QR (modal-overlay) luôn nằm trên tất cả, kể cả modal đăng nhập */
+.qr-modal-fixed {
+    z-index: 10000; /* Z-Index rất cao để chắc chắn nằm trên tất cả */
+    transition: opacity 0.3s ease;
+    /* Thêm thuộc tính này nếu không muốn nội dung modal bị ảnh hưởng bởi scroll của trang */
+    position: fixed; 
+}
+
+
+/* Style cho container chính của modal (modal-container) */
+.qr-modal-fixed .modal-container {
+    /* Đảm bảo nội dung modal có bối cảnh stacking context tốt */
+    z-index: 10001; 
+    position: relative; 
+    background-color: #2a2a2a; /* Màu nền cho hộp modal */
+    /* ... các style khác giữ nguyên ... */
+}
+
+
+/* Style cho các container QR code cá nhân */
+#individualTicketContainer {
+    /* Đảm bảo không có padding làm xô lệch nội dung */
+    padding: 10px; 
+    background: #1a1a1a; 
+    border-radius: 8px;
+}
+
+/* Đảm bảo nội dung QR code (thẻ canvas/img được qrcode.js tạo ra) luôn hiển thị */
+#individualTicketContainer > div > div:last-child {
+    /* Đây là div container của chính mã QR */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style cho chính QR code được tạo (là thẻ canvas/div) */
+#individualTicketContainer canvas,
+#individualTicketContainer div[id^="qr-ticket"] > canvas {
+    display: block; /* Quan trọng để tránh lỗi hiển thị inline-block */
+    width: 150px !important; /* Buộc kích thước đúng */
+    height: 150px !important;
+}
+
+/* Đảm bảo nút đóng (x) luôn nằm trên nội dung modal */
+.modal-container .close-btn {
+    z-index: 10002;
+    color: #ff6a88; /* Nổi bật hơn */
+    background: none;
+    
+}
+
+.checkout-button{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}

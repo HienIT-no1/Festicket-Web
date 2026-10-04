@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicketBox - Vé của tôi</title>
+    <link rel="stylesheet" href="vecuatoi.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="header">
+        <a href="/trangchu/trangchu1.html" style="text-decoration: none;">
+            <div class="logo">Festicket</div>
+        </a>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Bạn tìm gì hôm nay?">
+            <button class="search-btn">Tìm kiếm</button>
+        </div>
+        <div class="header-right">
+            <a href="/taochuongtrinh/taochuongtrinh.html" style="text-decoration: none;">
+                <button class="header-btn">Tạo chương trình</button>
+            </a>
+
+            <div class="user-menu-wrapper" id="userAccountDisplay" style="display:none;">
+                <button class="account-btn">
+                    <span id="userNameDisplay">Tài khoản</span> <i class="fa-solid fa-chevron-down fa-xs"></i>
+                    <div class="dropdown-menu">
+                        <a href="/vecuatoi/vecuatoi.html" class="dropdown-item">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Vé của tôi</span>
+                        </a>
+                        <a href="/sukiencuatoi/sukiencuatoi.html" class="dropdown-item">
+                            <i class="fa-solid fa-calendar"></i>
+                            <span>Chương trình của tôi</span>
+                        </a>
+                        <a href="/taikhoancuatoi/taikhoancuatoi.html" class="dropdown-item">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Tài khoản của tôi</span>
+                        </a>
+                        <a href="#" class="dropdown-item" onclick="handleLogout()">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            <span>Đăng xuất</span>
+                        </a>
+                    </div>
+                </button>
+            </div>
+
+            <div class="header-btn-auth" id="openAuthBtn">
+                Đăng nhập | Đăng ký
+            </div>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="/trangchu/trangchu1.html">Trang chủ</a>
+        <span>›</span>
+        <span style="color: white;">Vé của tôi</span>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="user-info">
+                <div>
+                    <div class="user-name">Tài khoản của</div>
+                    <div class="user-name-value">Khách</div>
+                </div>
+            </div>
+            <nav>
+                <a href="/taikhoancuatoi/taikhoancuatoi.html" style="text-decoration: none;">
+                    <div class="menu-item">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Cài đặt tài khoản <br>
+                            Thông tin tài khoản
+                        </span>
+                    </div>
+                </a>
+                <div class="menu-item active">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Vé của tôi</span>
+                </div>
+                <a href="/sukiencuatoi/sukiencuatoi.html" style="text-decoration: none;">
+                    <div class="menu-item">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span>Chương trình của tôi</span>
+                    </div>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="content-header">
+                <h1 class="content-title">Vé của tôi</h1>
+                <div class="tabs">
+                    <button class="tab active">Tất cả</button>
+                    <button class="tab">Đang xử lý</button>
+                    <button class="tab">Thành công</button>
+                    <button class="tab">Đã hủy</button>
+                </div>
+
+            </div>
+
+            <div class="orders-list">
+            </div>
+
+            <div class="empty-state" style="display:none;">
+                <div class="empty-illustration">
+                    <div class="sun"></div>
+                    <div class="astronaut">
+                        <div class="astronaut-head">
+                            <div class="visor"></div>
+                        </div>
+                        <div class="astronaut-body"></div>
+                    </div>
+                    <div class="horizon"></div>
+                </div>
+                <p class="empty-message">Bạn chưa có vé nào</p>
+                <button class="buy-ticket-btn">Mua vé ngay</button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="containerfooter">
+            <div class="inner-wrap">
+                <div class="footer-section">
+                    <h3>Hotline</h3>
+                    <p>Thứ 2 - Chủ Nhật (8:00 - 23:00)</p>
+                    <p style="color: #2ecc71; font-size: 20px; font-weight: bold;">1900.6408</p>
+                    <h3 style="margin-top: 20px;">Email</h3>
+                    <p>support@ticketbox.vn</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Dành cho Khách hàng</h3>
+                    <a href="#">Điều khoản sử dụng cho khách hàng</a>
+                    <h3 style="margin-top: 20px;">Dành cho Ban Tổ chức</h3>
+                    <a href="#">Điều khoản sử dụng cho ban tổ chức</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Về công ty chúng tôi</h3>
+                    <a href="#">Quy chế hoạt động</a>
+                    <a href="#">Chính sách bảo mật thông tin</a>
+                    <a href="#">Cơ chế giải quyết tranh chấp khiếu nại</a>
+                    <a href="#">Chính sách đổi trả và kiểm hàng</a>
+                    <a href="#">Điều kiện vận chuyển và giao nhận</a>
+                    <a href="#">Phương thức thanh toán</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Văn phòng chính</h3>
+                    <p>Tầng 12, Toà nhà Viettel, 285 Cách Mạng Tháng Tám, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh</p>
+                    <h3 style="margin-top: 20px;">Follow us</h3>
+                    <div class="socials">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-container">
+            <span class="close-btn">&times;</span>
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuth('login')">Đăng nhập</div>
+                <div class="auth-tab" onclick="switchAuth('register')">Đăng ký</div>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <h2>Chào mừng trở lại!</h2>
+                <div class="input-group">
+                    <input type="email" placeholder="Email hoặc số điện thoại" id="loginEmail">
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Mật khẩu" id="loginPassword">
+                </div>
+                <div class="form-actions">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+                <button class="submit-btn" onclick="handleLogin()">Đăng nhập</button>
+                <div class="social-login">
+                    <p>Hoặc đăng nhập bằng</p>
+                    <div class="social-icons">
+                        <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+                        <i class="fa-brands fa-google" style="color: #db4437;"></i>
+                    </div>
+                </div>
+            </div>
+            <div id="registerForm" class="auth-form">
+                <h2>Tạo tài khoản mới</h2>
+                <div class="input-group">
+                    <input type="text" placeholder="Họ và tên" id="regHoTen">
+                </div>
+                <div class="input-group">
+                    <input type="email" placeholder="Email" id="regEmail">
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Mật khẩu" id="regPassword">
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Nhập lại mật khẩu" id="regConfirmPassword">
+                </div>
+                <button class="submit-btn" onclick="handleRegister()">Đăng ký</button>
+                <div class="terms">
+                    Bằng việc đăng ký, bạn đồng ý với <a href="#">Điều khoản</a> của Festicket.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL QR (Đã sửa lại để chứa container động) -->
+    <!-- TRONG vecuatoi.html (Phần Modal QR) -->
+    <div id="qrModal" class="modal-overlay qr-modal-fixed"> <!-- ĐÃ XÓA style="display: none;" -->
+        <div class="modal-container" style="max-width: 600px; text-align: center; background:#2a2a2a;">
+            <span class="close-btn" onclick="document.getElementById('qrModal').classList.remove('show');">&times;</span>
+            <h2>Vé đã mua - Mã ĐH: <span id="qrOrderCode">...</span></h2>
+            <p style="color:#aaa; margin-bottom: 20px;">Mỗi vé có mã QR độc nhất để check-in.</p>
+
+            <div id="individualTicketContainer"
+                style="max-height: 400px; overflow-y: auto; padding: 10px; background:#1a1a1a; border-radius:8px;">
+            </div>
+            <button class="checkout-button" onclick="document.getElementById('qrModal').classList.remove('show');"
+                style="margin-top:20px; background:#FF6A88;">Đóng</button>
+        </div>
+    </div>
+
+
+    <!-- Đảm bảo thư viện QR Code được tải ĐẦU TIÊN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> 
+    
+
+
+    <script src="vecuatoi.js"></script>
+    <script src="/trangchu/trangchu.js"></script>
+    <script src="/header.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán - Bước 2</title>
+    <link rel="stylesheet" href="phuongthucthanhtoan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+    </header>
+    <a href="#" class="back-link" id="backLink">← Trở về</a>
+    <div class="container">
+        <h1 class="page-title">THANH TOÁN</h1>
+
+        <main class="main-content">
+            <div class="payment-column">
+
+                <div class="time-lock-box">
+                    <i class="fas fa-lock"></i>
+                    <p>Thời gian giữ chỗ còn lại:</p>
+                    <div class="countdown-timer" id="countdownTimer">10:00</div>
+                </div>
+
+                <section class="info-block ticket-info">
+                    <h2 class="block-title">Thông tin nhận vé</h2>
+                    <p class="description">Vé điện tử sẽ được hiển thị trong mục **"Vé của tôi"** của tài khoản</p>
+                    <p class="user-email" id="userEmailDisplay">...</p>
+                </section>
+
+
+
+                <section class="info-block payment-methods">
+                    <h2 class="block-title">Phương thức thanh toán</h2>
+
+                    <ul class="method-list" id="paymentMethodsContainer">
+                        <li class="payment-method selected" data-method="vnpay">
+                            <input type="radio" name="payment-method" id="vnpay" value="VNPay" checked>
+                            <label for="vnpay">
+                                <span class="method-logo vnpay-logo"></span>
+                                <span class="method-name">VNPay/Ứng dụng ngân hàng</span>
+                            </label>
+                        </li>
+                        <li class="payment-method" data-method="shopeepay">
+                            <input type="radio" name="payment-method" id="shopeepay" value="ShopeePay">
+                            <label for="shopeepay">
+                                <span class="method-logo shopeepay-logo"></span>
+                                <span class="method-name">ShopeePay</span>
+                            </label>
+                        </li>
+                        <li class="payment-method" data-method="zalopay">
+                            <input type="radio" name="payment-method" id="zalopay" value="ZaloPay">
+                            <label for="zalopay">
+                                <span class="method-logo zalopay-logo"></span>
+                                <span class="method-name">Zalopay</span>
+                            </label>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+
+            <aside class="summary-column">
+                <div class="summary-box">
+
+                    <section class="order-summary-block ticket-details">
+                        <div class="summary-header">
+                            <h2 class="block-title" id="summaryEventName">Thông tin đặt vé</h2>
+                            <a href="#" class="edit-link" id="editTicketsLink">Chọn lại vé</a>
+                        </div>
+                        <p id="summaryDateTimeDisplay" style="font-size: 14px; margin-bottom: 10px;"></p>
+                        <div id="ticketListContainer">
+                        </div>
+                    </section>
+
+                    <section class="order-summary-block order-details">
+                        <h2 class="block-title">Thông tin đơn hàng</h2>
+
+                        <div class="price-row subtotal">
+                            <span>Tạm tính</span>
+                            <span id="subtotalDisplay">0 đ</span>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="price-row total-amount">
+                            <span>Tổng tiền</span>
+                            <span class="final-price" id="finalPriceDisplay">0 đ</span>
+                        </div>
+                    </section>
+
+                    <p class="terms-text">Bằng việc tiến hành đặt mua, bạn đã đồng ý với <a href="#">Điều Kiện Giao Dịch
+                            Chung</a></p>
+                    <button class="checkout-button" id="confirmCheckoutBtn">Thanh toán</button>
+                </div>
+            </aside>
+        </main>
+    </div>
+    <div id="confirmExitModal" class="payment-modal-overlay" style="display: none;">
+        <div class="payment-modal-content">
+            <h2>Xác nhận rời khỏi trang thanh toán</h2>
+            <p style="margin-bottom: 25px; color:#ccc;">
+                Bạn đang có đơn hàng giữ chỗ. Nếu rời khỏi trang, đơn hàng sẽ bị hủy và bạn phải đặt vé lại.
+            </p>
+            <button id="stayBtn" class="checkout-button" style="background:#555; width: 45%; margin-right: 10px;">Ở
+                lại</button>
+            <button id="exitBtn" class="checkout-button" style="background:#f44336; width: 45%;">Rời đi</button>
+        </div>
+    </div>
+</body>
+<script src="phuongthucthanhtoan.js"></script>
+
+</html>

@@ -1,0 +1,386 @@
+/* Kế thừa body tối màu từ trangchu.css */
+body {
+    background-color: #111; /* Màu nền đen tối */
+    color: white;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+/* --- THANH FILTER BAR --- */
+.filter-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #000; /* Nền đen đậm hơn */
+    border-bottom: 1px solid #333;
+    position: relative; /* Để popup định vị */
+}
+
+.filter-left .result-text {
+    color: #00c853; /* Màu xanh lá */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.filter-right {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.filter-item {
+    background: #333;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative; /* Quan trọng cho popup con */
+}
+
+.filter-item:hover {
+    background: #444;
+}
+
+.filter-btn {
+    background-color: #00c853;
+    color: white;
+    font-weight: bold;
+}
+
+.filter-btn:hover {
+    background-color: #00a843;
+}
+
+/* --- POPUP FILTER (Cái bảng trắng trong ảnh) --- */
+.filter-popup {
+    display: none; /* Ẩn mặc định */
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 320px;
+    background: white;
+    color: #333;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    z-index: 1000;
+    padding: 20px;
+    cursor: default;
+}
+
+.filter-popup.show {
+    display: block;
+}
+
+.popup-section {
+    margin-bottom: 15px;
+}
+
+.popup-section h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.radio-item {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.radio-item input {
+    margin-right: 10px;
+    accent-color: #00c853;
+}
+
+.row-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-left: 10px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px; width: 16px;
+    left: 2px; bottom: 2px;
+    background-color: white;
+    transition: .4s;
+}
+input:checked + .slider { background-color: #00c853; }
+input:checked + .slider:before { transform: translateX(20px); }
+.slider.round { border-radius: 20px; }
+.slider.round:before { border-radius: 50%; }
+
+/* Tags (Thể loại) */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-choice {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tag-choice:hover {
+    background: #f5f5f5;
+}
+
+.tag-choice.selected {
+    background: #00c853;
+    color: white;
+    border-color: #00c853;
+}
+
+/* Footer Popup Buttons */
+.popup-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-reset {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #00c853;
+    background: white;
+    color: #00c853;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-apply {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #00c853;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-results-wrapper {
+    padding: 30px 50px;
+}
+
+/* Active Tag (Hiển thị bên ngoài) */
+.active-tag-display {
+    background: #00c853;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+}
+
+/* --- POPUP LỊCH (Date Picker) --- */
+.date-picker {
+    position: relative;
+}
+
+.date-popup {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 680px; /* Rộng hơn để chứa 2 lịch */
+    background: #222; /* Nền tối cho popup */
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    z-index: 1000;
+    padding: 20px;
+    cursor: default;
+}
+
+.date-popup.show {
+    display: block;
+}
+
+.quick-filter-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.quick-tab {
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.quick-tab:hover {
+    background: #333;
+}
+
+.quick-tab.selected {
+    background: #00c853;
+    font-weight: bold;
+}
+
+.calendars-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.calendar-month {
+    flex: 1;
+    text-align: center;
+}
+
+.month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: white; 
+}
+
+.month-header i {
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 cột 1fr */
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 5px;
+    /* Căn giữa nội dung của mỗi cột (T2, T3,...) */
+    text-align: center; 
+}
+/* Đảm bảo mỗi chữ T2, T3... được căn giữa trong cột của nó */
+.days-of-week span {
+    text-align: center;
+    padding: 8px 0; /* Giúp căn đều với các ô ngày */
+}
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.day {
+    padding: 8px 0;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.1s, border 0.1s;
+    text-align: center;
+    height: 35px; 
+    width: 35px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+}
+
+.day.empty {
+    visibility: hidden;
+    cursor: default;
+}
+
+.day:hover:not(.empty):not(.in-range):not(.selected-start):not(.selected-end) {
+    background: #444;
+}
+
+.day.today {
+    border: 1px solid #00c853;
+    color: #00c853;
+}
+
+.day.selected-start, .day.selected-end {
+    background: #00c853 !important;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+.day.in-range {
+    background-color: #00c85350; /* Màu nền mờ */
+    color: white;
+    border-radius: 0;
+}
+/* Đảm bảo border-radius bị cắt ở 2 đầu */
+.day.selected-start { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.day.selected-end { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.day.selected-start.selected-end { border-radius: 50%; } /* Khi chỉ chọn 1 ngày */
+
+
+/* Footer Popup Ngày */
+.popup-footer-date {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    padding-top: 15px;
+}
+
+.btn-apply-date {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #00c853;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.date-popup .btn-reset {
+    background: white;
+    color: #00c853;
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #00c853;
+    border-radius: 5px;
+}
+/* Nút áp dụng màu xám khi chưa có ngày được chọn */
+.btn-apply-date.disabled {
+    background: #888;
+    cursor: not-allowed;
+}

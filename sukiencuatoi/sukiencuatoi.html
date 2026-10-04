@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tạo chương trình - Organizer Center</title>
+  <link rel="stylesheet" href="sukiencuatoi.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="bg-page text-gray-200">
+  <div id="toast"><div id="toastCard" class="toast-card"></div></div>
+
+  <div class="flex h-screen">
+    <aside class="w-56 sidebar-gradient border-r border-dark flex flex-col justify-between">
+      <div>
+        <div class="flex items-center px-4 py-4 border-b border-dark">
+          <div class="brand-bg text-white font-bold w-9 h-9 rounded flex items-center justify-center">OC</div>
+          <span class="ml-2 font-semibold brand-text">Organizer Center</span>
+        </div>
+        <nav class="mt-4 space-y-1 px-2 text-[.9rem]">
+          <a href="#" class="nav-item">Chương trình của tôi</a>
+        </nav>
+      </div>
+      <div class="px-4 py-3 border-t border-dark text-[.8rem]">
+        <div class="flex items-center justify-between text-gray-300">
+          <span class="text-sm text-gray-400">Ngôn ngữ</span>
+          <div class="flex items-center space-x-2">
+            <span class="text-sm text-gray-300">Vie</span>
+            <img src="https://flagcdn.com/w20/vn.png" class="w-5 h-4 rounded" />
+            
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col">
+      <header class="topbar flex items-center justify-between px-6 py-3">
+        <h1 class="text-white font-semibold text-lg">Chương trình của tôi</h1>
+        <div class="flex items-center space-x-3">
+          <a href="/taochuongtrinh/taochuongtrinh.html">
+            <button class="btn-solid-brand text-sm font-medium">+ Tạo chương trình</button>
+          </a>
+          
+          <button class="account-btn">
+          Tài khoản ▼
+                <div class="dropdown-menu">
+                    <a href="/vecuatoi/vecuatoi.html" class="dropdown-item">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>Vé của tôi</span>
+                    </a>
+                    <a href="/sukiencuatoi/sukiencuatoi.html" class="dropdown-item">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span>Chương trình của tôi</span>
+                    </a>
+                    <a href="/taikhoancuatoi/taikhoancuatoi.html" class="dropdown-item">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Tài khoản của tôi</span>
+                    </a>
+                    <a href="/trangchu/trangchu1.html" class="dropdown-item">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Đăng xuất</span>
+                    </a>
+                </div>
+          </button>
+        </div>
+      </header>
+      <div class="content-area">
+          <div class="search-section">
+              <div class="search-container">
+                  <div class="search-input-wrapper">
+                      <input id="searchInput" type="text" class="search-input" placeholder="Tìm kiếm chương trình">
+                  </div>
+                  <button id="searchBtn" class="search-btn">Tìm kiếm</button>
+              </div>
+
+              <div class="filter-tabs">
+                  <button class="filter-tab active" data-status="DangBan">Sắp tới</button>
+                  <button class="filter-tab" data-status="KetThuc">Đã qua</button>
+                  <button class="filter-tab" data-status="ChoDuyet">Chờ duyệt</button>
+                  <button class="filter-tab" data-status="Nháp">Nháp</button>
+              </div>
+          </div>
+
+          <div class="empty-state">
+              <div class="empty-icon">
+                  <div class="hat-icon">
+                      <div class="hat-brim"></div>
+                      <div class="hat-band"></div>
+                  </div>
+              </div>
+              <p class="empty-message">Không có Chương trình nào</p>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+<div id="detailModal" class="modal-overlay">
+      <div id="mContent" class="modal-content">
+          <div class="modal-header">
+              <h3 class="modal-title">Chi tiết chương trình</h3>
+              <button id="modalCloseBtn" class="modal-close">×</button>
+          </div>
+          <div id="mBody" class="modal-body">
+              </div>
+      </div>
+  </div>
+</body>
+<script src="sukiencuatoi.js"></script>
+</html>

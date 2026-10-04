@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả tìm kiếm - Festicket</title>
+    <link rel="stylesheet" href="/trangchu/trangchu.css">
+    <link rel="stylesheet" href="timkiem.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <div class="header">
+        <a href="/trangchu/trangchu1.html">
+            <div class="logo">Festicket</div>
+        </a>
+        <div class="search-container">
+            <input type="text" class="search-box" id="pageSearchInput" placeholder="Bạn tìm gì hôm nay?">
+            <button class="search-btn" id="pageSearchBtn">Tìm kiếm</button>
+        </div>
+        <div class="header-right">
+            <button class="header-btn">Tạo chương trình</button>
+
+            <div class="user-menu-wrapper" id="userAccountDisplay">
+
+                <button class="account-btn">
+                    <span id="userNameDisplay">Tài khoản</span> <i class="fa-solid fa-chevron-down fa-xs"></i>
+
+                    <div class="dropdown-menu">
+                        <a href="/vecuatoi/vecuatoi.html" class="dropdown-item">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Vé của tôi</span>
+                        </a>
+                        <a href="/sukiencuatoi/sukiencuatoi.html" class="dropdown-item">
+                            <i class="fa-solid fa-calendar"></i>
+                            <span>Chương trình của tôi</span>
+                        </a>
+                        <a href="/taikhoancuatoi/taikhoancuatoi.html" class="dropdown-item">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Tài khoản của tôi</span>
+                        </a>
+                        <a href="#" class="dropdown-item" onclick="handleLogout()">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            <span>Đăng xuất</span>
+                        </a>
+                    </div>
+                </button>
+            </div>
+
+            <div class="header-btn-auth" id="openAuthBtn">
+                Đăng nhập | Đăng ký
+            </div>
+        </div>
+    </div>
+
+
+    <div class="filter-bar-container">
+        <div class="filter-left">
+            <span class="result-text">Kết quả tìm kiếm:</span>
+        </div>
+
+        <div class="filter-right">
+
+            <div class="filter-item date-picker" id="dateFilterBtn">
+                <i class="fa-regular fa-calendar"></i>
+                <span id="dateDisplay">Tất cả các ngày</span>
+                <i class="fa-solid fa-chevron-down"></i>
+
+                <div class="date-popup" id="datePopup">
+                    <div class="quick-filter-tabs">
+                        <span class="quick-tab selected" data-date-range="all">Tất cả các ngày</span>
+
+                    </div>
+
+                    <div class="date-range-content">
+                        <div class="calendars-container">
+                            <div class="calendar-month">
+                                <div class="month-header">
+                                    <i class="fa-solid fa-chevron-left fa-sm date-nav-prev"
+                                        onclick="changeMonth(-1, event)"></i>
+                                    <span id="month1Title"></span>
+                                </div>
+                                <div class="days-of-week">
+                                    <span>T2</span>
+                                    <span>T3</span>
+                                    <span>T4</span>
+                                    <span>T5</span>
+                                    <span>T6</span>
+                                    <span>T7</span>
+                                    <span>CN</span>
+                                </div>
+                                <div class="days-grid" id="month1Grid">
+                                </div>
+                            </div>
+
+                            <div class="calendar-month">
+                                <div class="month-header">
+                                    <span id="month2Title"></span>
+                                    <i class="fa-solid fa-chevron-right fa-sm date-nav-prev"
+                                        onclick="changeMonth(1, event)"></i>
+                                </div>
+                                <div class="days-of-week">
+                                    <span>T2</span>
+                                    <span>T3</span>
+                                    <span>T4</span>
+                                    <span>T5</span>
+                                    <span>T6</span>
+                                    <span>T7</span>
+                                    <span>CN</span>
+                                </div>
+                                <div class="days-grid" id="month2Grid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup-footer-date">
+                        <button class="btn-reset" id="resetDateBtn">Thiết lập lại</button>
+                        <button class="btn-apply-date" id="applyDateBtn">Áp dụng</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="filter-item filter-btn" id="openFilterBtn">
+                <i class="fa-solid fa-filter"></i>
+                <span>Bộ lọc</span>
+
+                <div class="filter-popup" id="filterPopup">
+                    <div class="popup-section">
+                        <h4>Vị trí</h4>
+                        <label class="radio-item"><input type="radio" name="location" value="Toàn quốc" checked> Toàn
+                            quốc</label>
+                        <label class="radio-item"><input type="radio" name="location" value="Hồ Chí Minh"> Hồ Chí
+                            Minh</label>
+                        <label class="radio-item"><input type="radio" name="location" value="Hà Nội"> Hà Nội</label>
+                        <label class="radio-item"><input type="radio" name="location" value="Đà Lạt"> Đà Lạt</label>
+                        <label class="radio-item"><input type="radio" name="location" value="Khác"> Vị trí khác</label>
+                    </div>
+
+                    <hr>
+
+
+
+                    <div class="popup-section">
+                        <h4>Thể loại</h4>
+                        <div class="tags-container">
+                            <span class="tag-choice" data-id="1">Nhạc sống</span>
+                            <span class="tag-choice" data-id="2">Sân khấu & Nghệ thuật</span>
+                            <span class="tag-choice" data-id="3">Thể Thao</span>
+                            <span class="tag-choice" data-id="4">Khác</span>
+                        </div>
+                    </div>
+
+                    <div class="popup-footer">
+                        <button class="btn-reset" id="resetFilterBtn">Thiết lập lại</button>
+                        <button class="btn-apply" id="applyFilterBtn">Áp dụng</button>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="active-tags-display" id="activeTags">
+            </div>
+        </div>
+    </div>
+
+    <div class="search-results-wrapper">
+        <h2 id="searchTitle" style="margin-bottom: 20px; color: white;">Đang tải...</h2>
+        <div class="events-grid" id="resultsGrid">
+        </div>
+    </div>
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-container">
+            <span class="close-btn">&times;</span>
+
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuth('login')">Đăng nhập</div>
+                <div class="auth-tab" onclick="switchAuth('register')">Đăng ký</div>
+            </div>
+
+            <div id="loginForm" class="auth-form active">
+                <h2>Chào mừng trở lại!</h2>
+                <div class="input-group">
+                    <input type="email" placeholder="Email hoặc số điện thoại" id="loginEmail">
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Mật khẩu" id="loginPassword">
+                </div>
+                <div class="form-actions">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+                <button class="submit-btn" onclick="handleLogin()">Đăng nhập</button>
+                <!-- <div class="social-login">
+                    <p>Hoặc đăng nhập bằng</p>
+                    <div class="social-icons">
+                        <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+                        <i class="fa-brands fa-google" style="color: #db4437;"></i>
+                    </div>
+                </div> -->
+            </div>
+
+            <div id="registerForm" class="auth-form">
+                <h2>Tạo tài khoản mới</h2>
+                <div class="input-group">
+                    <input type="text" placeholder="Họ và tên" id="regHoTen">
+                </div>
+                <div class="input-group">
+                    <input type="email" placeholder="Email" id="regEmail">
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Mật khẩu" id="regPassword">
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Nhập lại mật khẩu" id="regConfirmPassword">
+                </div>
+                <button class="submit-btn" onclick="handleRegister()">Đăng ký</button>
+                <div class="terms">
+                    Bằng việc đăng ký, bạn đồng ý với <a href="#">Điều khoản</a> của Festicket.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/trangchu/trangchu.js"></script>
+    <script src="/header.js"></script>
+    <script src="timkiem.js"></script>
+
+</body>
+
+</html>
