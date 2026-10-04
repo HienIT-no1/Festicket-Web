@@ -30,7 +30,7 @@ function fetchAndRender(containerId, categoryId, limit, renderType) {
     container.innerHTML = '<p style="color:#aaa; text-align:center; width:100%; padding:20px;">Đang tải...</p>';
 
     // Tạo URL API
-    let url = `http://localhost:3000/api/events?limit=${limit}`;
+    let url = `/api/events?limit=${limit}`;
     if (categoryId) {
         url += `&category=${categoryId}`;
     }
@@ -152,7 +152,7 @@ function loadMainSlider() {
     if (!slidesContainer || !dotsContainer) return;
 
     // 1. Fetch 4 sự kiện gần nhất (Đã được lọc và sắp xếp trong server.js)
-    fetch('http://localhost:3000/api/events?limit=3') 
+    fetch('/api/events?limit=3') 
         .then(res => res.json())
         .then(events => {
             if (!events || events.length === 0) {

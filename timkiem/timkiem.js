@@ -92,7 +92,7 @@ function fetchEvents(filterOverrides = {}) {
     if(grid) grid.innerHTML = '<p style="text-align:center; width:100%; color:#aaa; margin-top:20px;">Đang tải dữ liệu...</p>';
 
     // GỌI API SERVER
-    fetch(`http://localhost:3000/api/events?${params.toString()}`)
+    fetch(`/api/events?${params.toString()}`)
         .then(res => res.json())
         .then(events => {
             if(!grid) return;

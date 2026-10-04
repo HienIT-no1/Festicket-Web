@@ -1,6 +1,6 @@
 // admin-payments.js (Logic cho Quản lí Thanh Toán)
 
-const PAYMENT_API_BASE = 'http://localhost:3000/api/admin';
+const PAYMENT_API_BASE = '/api/admin';
 let allPayments = []; 
 
 // --- HÀM TIỆN ÍCH ---

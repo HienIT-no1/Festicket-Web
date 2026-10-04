@@ -85,7 +85,7 @@ function showEventDetails(event) {
 function deleteEvent(id, btnElement) {
     if (!confirm('Bạn có chắc chắn muốn xóa sự kiện này?')) return;
     
-    fetch(`http://localhost:3000/api/organizer/events/${id}`, { method: 'DELETE' })
+    fetch(`/api/organizer/events/${id}`, { method: 'DELETE' })
     .then(res => res.json())
     .then(data => {
         if (data.success) {
@@ -251,7 +251,7 @@ function loadEvents(status, query = '') {
         return;
     }
     
-    let url = `http://localhost:3000/api/organizer/my-events`;
+    let url = `/api/organizer/my-events`;
     
     // ... (Phần xây dựng URL giữ nguyên)
     const params = [];

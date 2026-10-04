@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const buyButton = document.getElementById('buyTicketBtn');
 
     // 1. Tải chi tiết sự kiện
-    fetch(`http://localhost:3000/api/events/${id}`)
+    fetch(`/api/events/${id}`)
         .then(res => res.json())
         .then(event => {
             if (!event) return;
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadTickets(id, dateString, venue) {
-    fetch(`http://localhost:3000/api/events/${id}/tickets`)
+    fetch(`/api/events/${id}/tickets`)
         .then(res => res.json())
         .then(tickets => {
             const container = document.getElementById('ticketAccordion');
@@ -117,7 +117,7 @@ function loadTickets(id, dateString, venue) {
 }
 
 function loadRelatedEvents() {
-    fetch('http://localhost:3000/api/events')
+    fetch('/api/events')
         .then(res => res.json())
         .then(events => {
             const container = document.getElementById('relatedEventsGrid');

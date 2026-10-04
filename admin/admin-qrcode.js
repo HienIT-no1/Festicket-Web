@@ -1,7 +1,7 @@
 // admin-ticket-list.js
 
 // Khai báo biến cần thiết
-const TICKET_API_BASE = 'http://localhost:3000/api/admin';
+const TICKET_API_BASE = '/api/admin';
 let allPaidOrders = []; // Lưu trữ dữ liệu gốc
 
 // --- HÀM TIỆN ÍCH ---

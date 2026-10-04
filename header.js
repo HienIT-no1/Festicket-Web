@@ -42,7 +42,7 @@ window.handleRegister = function() {
     }
 
     // SỬA: Dùng /api/register
-    fetch('http://localhost:3000/api/register', { 
+    fetch('/api/register', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ hoTen, email, password })
@@ -64,7 +64,7 @@ window.handleLogin = function() {
     const password = document.getElementById('loginPassword').value; 
 
     // 1. Gọi API đăng nhập (URL API được giữ nguyên như trong mã cũ)
-    fetch('http://localhost:3000/api/login', {
+    fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

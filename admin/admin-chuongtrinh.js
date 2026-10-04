@@ -1,6 +1,6 @@
 // admin-chuongtrinh.js
 
-const EVENT_API_BASE_URL = 'http://localhost:3000/api/admin/events';
+const EVENT_API_BASE_URL = '/api/admin/events';
 let allEventsData = []; // Lưu trữ toàn bộ dữ liệu sự kiện
 
 // =========================================================

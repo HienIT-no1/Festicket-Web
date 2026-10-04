@@ -25,7 +25,7 @@ function formatVND(amount) {
 // HÀM CHÍNH: TẢI DỮ LIỆU VÀ CẬP NHẬT DASHBOARD
 // --------------------------------------------------------
 async function loadDashboardData() {
-    const baseUrl = 'http://localhost:3000/api/admin/stats';
+    const baseUrl = '/api/admin/stats';
     
     // Cập nhật thẻ thống kê hàng ngày
     await fetchDailyStats(baseUrl);

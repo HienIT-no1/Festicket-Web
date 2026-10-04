@@ -7,7 +7,7 @@ let ticketRatioChartInstance = null;
 // =========================================================
 
 window.loadStatisticsData = async function() {
-    const baseUrl = 'http://localhost:3000/api/admin/stats';
+    const baseUrl = '/api/admin/stats';
     
     // Tải và vẽ Biểu đồ Đơn hàng theo ngày
     await fetchAndRenderDailyOrders(baseUrl);

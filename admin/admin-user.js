@@ -1,6 +1,6 @@
 // admin-user.js (Phiên bản đã sửa lỗi, thêm Tìm kiếm và Modal Sửa/Xóa)
 
-const USER_API_BASE_URL = 'http://localhost:3000/api/admin/users';
+const USER_API_BASE_URL = '/api/admin/users';
 let allUsersData = []; // Lưu trữ toàn bộ dữ liệu người dùng
 
 // =========================================================

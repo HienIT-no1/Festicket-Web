@@ -1,7 +1,7 @@
 
 // --- THÊM CÁC HÀM SAU VÀO taikhoancuatoi.js ---
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = '/api';
 
 // Hàm lấy thông tin người dùng từ sessionStorage
 function getCurrentUser() {

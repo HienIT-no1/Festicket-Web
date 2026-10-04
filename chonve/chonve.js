@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const API_BASE = 'http://localhost:3000/api/';
+    const API_BASE = '/api/';
     let tickets = {}; // Object lưu trữ dữ liệu vé dynamic (key: MaLoaiCho)
     let eventDetails = {}; // Thông tin sự kiện
 

@@ -575,7 +575,7 @@ function buildDbPayload(ev){
 async function submitEventToServer(ev){
   const payload = buildDbPayload(ev);
 
-  const res = await fetch('http://localhost:3000/api/admin/events', {
+  const res = await fetch('/api/admin/events', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)

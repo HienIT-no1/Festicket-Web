@@ -1,6 +1,6 @@
 // File: admin-order.js
 
-const ORDER_API_BASE = 'http://localhost:3000/api/orders'; 
+const ORDER_API_BASE = '/api/orders'; 
 
 // === HÀM TIỆN ÍCH ===
 

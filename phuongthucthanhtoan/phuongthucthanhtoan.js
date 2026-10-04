@@ -1,7 +1,7 @@
 // phuongthucthanhtoan.js (FIXED: Dynamic Methods & Button Click)
 
 document.addEventListener('DOMContentLoaded', () => {
-    const API_BASE = 'http://localhost:3000/api/';
+    const API_BASE = '/api/';
     const TICKET_DURATION = 600; // 10 phút
     const backLink = document.getElementById('backLink');
 
