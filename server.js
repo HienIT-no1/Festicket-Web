@@ -31,14 +31,24 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static(__dirname)); 
 
 // Kết nối DB
-const db = mysql.createConnection({
+const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '123456',
     database: process.env.DB_NAME || 'VeSuKienDB',
     port: process.env.DB_PORT || 3306,
-    charset: 'utf8mb4' 
-});
+    charset: 'utf8mb4'
+};
+
+// TiDB Cloud Serverless bắt buộc kết nối bảo mật qua SSL
+if (process.env.DB_HOST && process.env.DB_HOST !== 'localhost') {
+    dbConfig.ssl = {
+        minVersion: 'TLSv1.2',
+        rejectUnauthorized: true
+    };
+}
+
+const db = mysql.createConnection(dbConfig);
 db.connect(err => {
     if (err) console.error('❌ Lỗi kết nối DB:', err);
     else console.log('✅ Đã kết nối MySQL!');
